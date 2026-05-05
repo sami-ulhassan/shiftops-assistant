@@ -1,5 +1,5 @@
 import { shifts } from "../../data/shifts";
-import { useTaskStore } from "../../src/store/taskStore";
+import { useTaskStore } from "../../store/taskStore";
 
 export default function ShiftBoard() {
   const tasks = useTaskStore((state) => state.tasks);

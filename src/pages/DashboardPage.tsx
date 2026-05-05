@@ -1,4 +1,6 @@
 import ShiftBoard from "../components/tasks/ShiftBoard";
+import TaskForm from "../components/tasks/TaskForm";
+import HandoverNotes from "../components/handover/HandoverNotes";
 
 export default function DashboardPage() {
   return (
@@ -7,6 +9,8 @@ export default function DashboardPage() {
         ShiftOps Assistant
       </h1>
 
+      <TaskForm />
+      <HandoverNotes />
       <ShiftBoard />
     </main>
   );
