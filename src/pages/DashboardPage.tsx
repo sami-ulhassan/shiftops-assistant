@@ -1,6 +1,7 @@
 import ShiftBoard from "../components/tasks/ShiftBoard";
 import TaskForm from "../components/tasks/TaskForm";
 import HandoverNotes from "../components/handover/HandoverNotes";
+import EmailTemplates from "../components/templates/EmailTemplates";
 
 export default function DashboardPage() {
   return (
@@ -11,6 +12,7 @@ export default function DashboardPage() {
 
       <TaskForm />
       <HandoverNotes />
+      <EmailTemplates />
       <ShiftBoard />
     </main>
   );
