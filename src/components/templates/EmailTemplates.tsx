@@ -9,6 +9,8 @@ export default function EmailTemplates() {
   const [category, setCategory] = useState("Verzögerung");
   const [content, setContent] = useState("");
 
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
@@ -25,8 +27,11 @@ export default function EmailTemplates() {
     setContent("");
   }
 
-  function copyTemplate(text: string) {
+  function copyTemplate(text: string, id: string) {
     navigator.clipboard.writeText(text);
+    setCopiedId(id);
+
+    setTimeout(() => setCopiedId(null), 1500);
   }
 
   return (
@@ -72,17 +77,17 @@ export default function EmailTemplates() {
         ) : (
           templates.map((template) => (
             <article key={template.id} className="rounded-lg border p-3">
-              <div className="mb-2 flex items-center justify-between gap-3">
+              <div className="mb-2 flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-medium text-gray-900">{template.title}</h3>
                   <p className="text-xs text-gray-500">{template.category}</p>
                 </div>
 
                 <button
-                  onClick={() => copyTemplate(template.content)}
-                  className="rounded-md border px-3 py-1 text-xs font-medium"
+                  onClick={() => copyTemplate(template.content, template.id)}
+                  className="text-xs text-gray-500 hover:text-gray-900"
                 >
-                  Kopieren
+                  {copiedId === template.id ? "Kopiert" : "Kopieren"}
                 </button>
               </div>
 

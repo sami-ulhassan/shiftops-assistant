@@ -86,7 +86,13 @@ export default function TaskForm() {
                     <option value="high">Hoch</option>
                 </select>
 
-                <button className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white">
+                <button
+                    disabled={!title.trim()}
+                    className={`rounded-md px-4 py-2 text-sm font-medium text-white ${title.trim()
+                            ? "bg-gray-900"
+                            : "cursor-not-allowed bg-gray-300"
+                        }`}
+                >
                     Aufgabe erstellen
                 </button>
 
