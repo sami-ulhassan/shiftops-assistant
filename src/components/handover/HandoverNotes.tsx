@@ -19,7 +19,12 @@ export default function HandoverNotes() {
 
   return (
     <div className="mb-6 rounded-xl border bg-white p-4 shadow-sm">
-      <h2 className="mb-4 text-lg font-semibold">Übergabe Notizen</h2>
+      <h2 className="text-lg font-semibold text-gray-900">
+        Übergabe Notizen
+      </h2>
+      <p className="mb-4 text-sm text-gray-500">
+        Notizen zur Übergabe zwischen Schichten
+      </p>
 
       <form onSubmit={handleSubmit} className="mb-4 space-y-3">
         <select

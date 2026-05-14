@@ -36,9 +36,12 @@ export default function EmailTemplates() {
 
   return (
     <section className="mb-6 rounded-xl border bg-white p-4 shadow-sm">
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">
+      <h2 className="text-lg font-semibold text-gray-900">
         E-Mail Vorlagen
       </h2>
+      <p className="mb-4 text-sm text-gray-500">
+        Wiederverwendbare Antworten für häufige Anfragen
+      </p>
 
       <form onSubmit={handleSubmit} className="mb-5 space-y-3">
         <input
