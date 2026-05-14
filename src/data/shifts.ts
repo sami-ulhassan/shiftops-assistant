@@ -4,4 +4,4 @@ export const shifts = [
   { id: "802", label: "802 – Shift 2" },
   { id: "803", label: "803 – Shift 3" },
   { id: "804", label: "804 – Shift 4" },
-];
+] as const;

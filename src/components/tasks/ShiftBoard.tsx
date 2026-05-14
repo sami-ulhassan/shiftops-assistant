@@ -1,8 +1,20 @@
 import { shifts } from "../../data/shifts";
 import { useTaskStore } from "../../store/taskStore";
 import TaskCard from "./TaskCard";
+import type { TaskStatus } from "../../types/task";
 
-export default function ShiftBoard() {
+interface ShiftBoardProps {
+  searchTerm: string;
+  statusFilter: TaskStatus | "all";
+}
+
+export type ShiftId = (typeof shifts)[number]["id"];
+
+export default function ShiftBoard({
+  searchTerm,
+  statusFilter,
+}: ShiftBoardProps) {
+
   const tasks = useTaskStore((state) => state.tasks);
   const takeOverTask = useTaskStore((state) => state.takeOverTask);
   const updateTaskStatus = useTaskStore((state) => state.updateTaskStatus);
@@ -11,7 +23,18 @@ export default function ShiftBoard() {
     <div className="w-full overflow-x-auto">
       <div className="grid min-w-[1400px] grid-cols-5 gap-4">
         {shifts.map((shift) => {
-          const shiftTasks = tasks.filter((task) => task.shiftId === shift.id);
+          const shiftTasks = tasks.filter((task) => {
+            const matchesShift = task.shiftId === shift.id;
+            const matchesSearch =
+              task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              task.assignedTo.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const matchesStatus =
+              statusFilter === "all" || task.status === statusFilter;
+
+            return matchesShift && matchesSearch && matchesStatus;
+          });
 
           return (
             <div key={shift.id} className="flex flex-col rounded-xl border bg-white p-4 shadow-sm">
@@ -31,8 +54,8 @@ export default function ShiftBoard() {
                     <TaskCard
                       key={task.id}
                       task={task}
-                      onTakeOver={() => takeOverTask(task.id, "803")}
-                      onStatusChange={(status) => updateTaskStatus(task.id, status)}
+                      onTakeOver={() => takeOverTask(task.id, shift.id)}
+                      onStatusChange={(status) => updateTaskStatus(task.id, "in_progress")}
                     />
                   ))
                 )}

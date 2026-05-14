@@ -36,7 +36,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
     takeOverTask: (taskId, newShiftId) =>
         set((state) => {
             const updated = state.tasks.map((task) =>
-                task.id === taskId ? { ...task, shiftId: newShiftId } : task
+                task.id === taskId ? { ...task, shiftId: newShiftId, assignedTo: "Du" } : task
             );
             saveTasks(updated);
             return { tasks: updated };
